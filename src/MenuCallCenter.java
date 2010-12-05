@@ -25,7 +25,7 @@ public class MenuCallCenter {
 				c.MenuChamada();
 			}
 			if(option2==2){
-			
+				c.MenuEmail();
 			}
 		}
 		
