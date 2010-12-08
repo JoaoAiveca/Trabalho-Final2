@@ -29,9 +29,6 @@ public class Contacto {
 		this.descricao=d;
 	}
 	
-	public void setDuracao(String d){
-		this.duracao=d;
-	}
 	
 	public void setCliente(String value, String tipo, Database x)//email ou telefone
 	{
@@ -61,18 +58,6 @@ public class Contacto {
 		duracao=((horas<10 ? "0": "")+horas+":"+(minutos<10 ? "0":"")+minutos+":"+(segundos<10 ? "0":"")+segundos);
 	}
 	
-	public void endContact(){
-		endData=Calendar.getInstance();
-		long ini=this.startData.getTimeInMillis();
-		long fin=endData.getTimeInMillis();
-		long diff=fin-ini;
-		int segundos=(int)diff/1000;
-		int horas=segundos/3600;
-		int resto=segundos%3600;
-		int minutos=resto/60;
-		segundos=resto%60;
-		duracao=((horas<10 ? "0": "")+horas+":"+(minutos<10 ? "0":"")+minutos+":"+(segundos<10 ? "0":"")+segundos);
-	}
 	
 	public String toString(){
 		//caso seja um email, usar N/A na duração
