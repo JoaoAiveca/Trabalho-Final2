@@ -20,8 +20,8 @@ public class DBContacto {
 		return x;
 	}
 	
-	public ArrayList<Contacto> listContacts(String nomeCliente){//A ideia e isto listar os contactos de um dado cliente.
-		//falta info da classe Contacto para por isto a funcionar.
+	public ArrayList<Contacto> listContacts(String nomeCliente){// Listar os contactos de um dado cliente.
+		
 		ArrayList<Contacto> temp = new ArrayList<Contacto>();
 		for(int i = 0;i<db.size();i++){
 			if(db.get(i).nomeClienteToCompare.equals(nomeCliente)==true){
@@ -92,8 +92,8 @@ public class DBContacto {
 			return tmp.toString();}
 
 	
-	/*public String listRudeContact(String cont){ //Listar clientes mal-educados.
-		//falta info da classe Contacto para por isto a funcionar.
+	public String listRudeContact(String cont){ //Listar clientes mal-educados.
+		
 		ArrayList<Contacto> temp = new ArrayList<Contacto>();
 		for(int i = 0;i<db.size();i++){
 			if(db.get(i).nomeClienteToCompare.equals(cont)==true){
@@ -101,6 +101,6 @@ public class DBContacto {
 			}
 		}
 		return temp.toString();
-	}*/
+	}
 	
 }

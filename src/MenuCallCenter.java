@@ -9,9 +9,11 @@ public class MenuCallCenter {
 	
 	public void MainMenuCC(){
 		
-		System.out.println("Seleccione uma opcao: ");
-		System.out.println("1 - Novo Registo; 0 - Sair");
-		option = s.nextInt();
+		do{
+			System.out.println("Seleccione uma opcao: ");
+			System.out.println("1 - Novo Registo; 0 - Sair");
+			option = s.nextInt();
+		}while(option!=1&&option!=0);
 		
 		if(option==0){
 			return;
@@ -25,9 +27,12 @@ public class MenuCallCenter {
 	}
 	
 	public void createContact(){
+		
+		do{
 		System.out.println("Tipo de Contacto:");
 		System.out.println("1 - Chamada; 2 - Email;");
 		option2 = s.nextInt();
+		}while(option2!=1&&option2!=2);
 	
 		System.out.println("Por favor insira o numero de funcionario: ");
 		num=s.nextInt();
@@ -35,10 +40,11 @@ public class MenuCallCenter {
 		if(option2==1){
 			c = new Contacto("chamada",num);
 			
-			//System.out.println("Número do Contacto:");
-			//srccont=s.next();
+			System.out.println("Número do Contacto:");
+			srccont=s.next();
 			
-			//c.setCliente(srccont,"phone",db);
+			c.setCliente(srccont, "mainPhone", simul());
+
 			
 			System.out.println("Identificação da pessoa que fez o contacto:");
 			id=s.nextLine();
@@ -58,22 +64,28 @@ public class MenuCallCenter {
 			
 			c.endContact();
 			duracao = c.duracao;
-			c.setDuracao(duracao);
+			
 		}
 		
-		if(option==2){
+		if(option2==2){
 			c = new Contacto("email",num);
 			
-			//System.out.println("Email do Contacto:");
-			//srcemail=s.next();
-			//c.setCliente(srcemail, "email", db);
+			System.out.println("Email do Contacto:");
+			srcemail=s.next();
+			c.setCliente(srcemail, "email", simul());
+			
+			System.out.println("Identificação da pessoa que fez o contacto:");
+			s.nextLine();
+			id=s.nextLine();
 			
 			System.out.println("Relacao com o cliente:");
 			relacao = s.next();
+			
 			c.setunReg(id, relacao);
 			
 			System.out.println("Descrição da Conversa:");
 			descricao = s.nextLine();
+			s.nextLine();
 			c.setDesc(descricao);
 			
 			System.out.println("Atitude do Cliente:");
@@ -94,7 +106,13 @@ public class MenuCallCenter {
 		Cliente c2 = new Cliente("Pedro Mateus","Faro","9876543");
 		Cliente c3 = new Cliente("Marlene Oliveira","Escoural","3456789");
 		Cliente c4 = new Cliente("Joana Valerio","Vila Nova de Milfontes","1356890");
+		
 		Database x = new Database();
+		
+		c1.addEmail("joaiveca@gmail.com");
+		c2.addEmail("pedro@hotmail.com");
+		c3.addEmail("marlene@gmail.com");
+		c4.addEmail("joana@hotmail.com");
 		
 		x.add(c1);
 		x.add(c2);
@@ -104,15 +122,11 @@ public class MenuCallCenter {
 		return x;
 	}
 	
-	public void MenuEmail(){
-		
-	}
-	
 	public static void main(String args []){
 		MenuCallCenter mn = new MenuCallCenter();
 		mn.MainMenuCC();
 		Contacto c = mn.c;
-		
+		System.out.println(c.toString());
 	}
 	
 	
