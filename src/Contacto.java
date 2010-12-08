@@ -8,7 +8,7 @@ public class Contacto {
 	String atitude;
 	Cliente c;
 	//Esta string só serve para simplificar o método de pesquisa de contactos de um determinado cliente.
-	String nomeClienteToCompare;
+	String nomeCliente;
 	int numFuncionario;
 	String unregContacto;
 	String unregContactoRel;
@@ -33,7 +33,7 @@ public class Contacto {
 	public void setCliente(String value, String tipo, Database x)//email ou telefone
 	{
 		this.c=x.search(value, tipo).get(0);
-		nomeClienteToCompare=c.getNome();
+		nomeCliente=c.getNome();
 	}
 	
 	public void setAtitude(String a){
@@ -64,13 +64,13 @@ public class Contacto {
 		String s="";
 		
 		if(unregContacto==null)
-			s="Funcionario Numero "+numFuncionario+"; "+"Tipo: "+tipo+"; "+"Data de Inicio: "
-			+startData.getTime()+"; "+ "Motivo: "+motivo+"; Nome do Cliente: "+nomeClienteToCompare+
+			s="Funcionario Numero "+numFuncionario+"; "+"Data de Inicio: "
+			+startData.getTime()+"; "+ "Motivo: "+motivo+"; Nome do Cliente: "+nomeCliente+
 			"; Descrição: "+descricao+"; duracao: "+duracao+"; Atitude do Cliente: "+atitude ; 
 		else
-			s="Funcionario Numero "+numFuncionario+"; "+"Tipo: "+tipo+"; "+"Data de Inicio: "
+			s="Funcionario Numero "+numFuncionario+"; "+"Data de Inicio: "
 			+startData.getTime()+"; "+ "Motivo: "+motivo+"; Descrição: "+descricao+
-			"; duracao: "+duracao+"; Nome do Cliente: "+nomeClienteToCompare+"; Atitude do Cliente: "
+			"; duracao: "+duracao+"; Nome do Cliente: "+nomeCliente+"; Atitude do Cliente: "
 			+atitude +"; Nome da pessoa que efectuou o contacto: "+unregContacto+
 			"; Relação com o Cliente: "+unregContactoRel;
 		

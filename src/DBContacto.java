@@ -24,7 +24,7 @@ public class DBContacto {
 		
 		ArrayList<Contacto> temp = new ArrayList<Contacto>();
 		for(int i = 0;i<db.size();i++){
-			if(db.get(i).nomeClienteToCompare.equals(nomeCliente)==true){
+			if(db.get(i).nomeCliente.equals(nomeCliente)==true){
 				temp.add(db.get(i));
 			}
 		}
@@ -50,7 +50,7 @@ public class DBContacto {
 			temp=new ArrayList<Contacto>();
 			//nomeClientes já tem valores. Vamos popular numContactos.
 			for(int j=0; j<this.db.size(); j++)
-				if(db.get(j).nomeClienteToCompare.equals(nomeClientes[i].getNome()))
+				if(db.get(j).nomeCliente.equals(nomeClientes[i].getNome()))
 					temp.add(db.get(j));
 			numContactos[i]=temp.size();
 			}
@@ -96,12 +96,14 @@ public class DBContacto {
 		
 		ArrayList<Contacto> temp = new ArrayList<Contacto>();
 		for(int i = 0;i<db.size();i++){
-			if(db.get(i).nomeClienteToCompare.equals(nomeCliente)==true){
-				temp.add(db.get(i));
+			if(db.get(i).nomeCliente.equals(nomeCliente)==true){
+				if(db.get(i).atitude.equals("Rude"))
+					temp.add(db.get(i));
 			}
 		}
 		return temp.toString();
 	}
+	
 	public Cliente[] listNeverContact(Database x){
 		
 		ArrayList<Contacto> temp;
@@ -122,7 +124,7 @@ public class DBContacto {
 			temp=new ArrayList<Contacto>();
 			//nomeClientes já tem valores. Vamos popular numContactos.
 			for(int j=0; j<this.db.size(); j++)
-				if(db.get(j).nomeClienteToCompare.equals(nomeClientes[i].getNome()))
+				if(db.get(j).nomeCliente.equals(nomeClientes[i].getNome()))
 					temp.add(db.get(j));
 			numContactos[i]=temp.size();
 			}
