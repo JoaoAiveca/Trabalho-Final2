@@ -12,12 +12,13 @@ public class Contacto {
 	int numFuncionario;
 	String unregContacto;
 	String unregContactoRel;
-	Calendar data;
+	Calendar startData;
+	Calendar endData;
 	
 	public Contacto(String ti, int nfunc){
 	this.tipo=ti;
 	numFuncionario=nfunc;
-	data=Calendar.getInstance();
+	startData=Calendar.getInstance();
 	}
 	
 	public void setMotivo(String m){
@@ -47,20 +48,36 @@ public class Contacto {
 		this.unregContactoRel=contRelacao;
 	}
 	
+	public void endContact(){
+		endData=Calendar.getInstance();
+		long ini=this.startData.getTimeInMillis();
+		long fin=endData.getTimeInMillis();
+		long diff=fin-ini;
+		int segundos=(int)diff/1000;
+		int horas=segundos/3600;
+		int resto=segundos%3600;
+		int minutos=resto/60;
+		segundos=resto%60;
+		duracao=((horas<10 ? "0": "")+horas+":"+(minutos<10 ? "0":"")+minutos+":"+(segundos<10 ? "0":"")+segundos);
+	}
+	
 	public String toString(){
 		//caso seja um email, usar N/A na duração
 		String s="";
 		
 		if(unregContacto==null)
-			s="Funcionario Numero "+numFuncionario+"; "+"Tipo: "+tipo+"; "+"Data: "
-			+data.getTime()+"; "+ "Motivo: "+motivo+"; Nome do Cliente: "+nomeClienteToCompare+
+			s="Funcionario Numero "+numFuncionario+"; "+"Tipo: "+tipo+"; "+"Data de Inicio: "
+			+startData.getTime()+"; "+ "Motivo: "+motivo+"; Nome do Cliente: "+nomeClienteToCompare+
 			"; Descrição: "+descricao+"; duracao: "+duracao+"; Atitude do Cliente: "+atitude ; 
 		else
-			s="Funcionario Numero "+numFuncionario+"; "+"Tipo: "+tipo+"; "+"Data: "
-			+data.getTime()+"; "+ "Motivo: "+motivo+"; Descrição: "+descricao+
-			"; duracao: "+duracao+"; Atitude do Cliente: "+atitude +
-			"; Nome da pessoa que efectuou o contacto: "+unregContacto+
+			s="Funcionario Numero "+numFuncionario+"; "+"Tipo: "+tipo+"; "+"Data de Inicio: "
+			+startData.getTime()+"; "+ "Motivo: "+motivo+"; Descrição: "+descricao+
+			"; duracao: "+duracao+"; Nome do Cliente: "+nomeClienteToCompare+"; Atitude do Cliente: "
+			+atitude +"; Nome da pessoa que efectuou o contacto: "+unregContacto+
 			"; Relação com o Cliente: "+unregContactoRel;
+		
 		return s;
 	}
+
+	
 }
