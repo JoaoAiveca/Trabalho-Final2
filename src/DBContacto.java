@@ -37,39 +37,39 @@ public class DBContacto {
 		//número de clientes existentes na empresa
 		int numClientes=x.data.size();
 		//Array de inteiros que indica o número de contactos dos clientes. há uma correspondência
-		//directa entre arrayT e t; numa posição em que correspondam (i=0, por exemplo), indica que
+		//directa entre numContactos e nomeClientes; numa posição em que correspondam (i=0, por exemplo), indica que
 		//o cliente cujo nome é t[0] tem x contactos efectuados (corresponde a arrayT[0]).
-		int[] arrayT=new int[numClientes];
+		int[] numContactos=new int[numClientes];
 		
-		Cliente[] t=new Cliente[numClientes];	
-		//t tem os nomes de todos os clientes da empresa
+		Cliente[] nomeClientes=new Cliente[numClientes];	
+		//nomeClientes tem os nomes de todos os clientes da empresa
 		for(int i=0; i<numClientes; i++)
-			t[i]=x.getCliente(i);
+			nomeClientes[i]=x.getCliente(i);
 		for(int i=0; i<numClientes; i++)
 			{
 			temp=new ArrayList<Contacto>();
-			//t já tem valores. Vamos popular arrayT.
+			//nomeClientes já tem valores. Vamos popular numContactos.
 			for(int j=0; j<this.db.size(); j++)
-				if(db.get(j).nomeClienteToCompare.equals(t[i].getNome()))
+				if(db.get(j).nomeClienteToCompare.equals(nomeClientes[i].getNome()))
 					temp.add(db.get(j));
-			arrayT[i]=temp.size();
+			numContactos[i]=temp.size();
 			}
-		//Neste ponto, temos os nomes dos clientes e o número de contactos, em t e arrayT.
+		//Neste ponto, temos os nomes dos clientes e o número de contactos, em nomeClientes e numContactos.
 		//Será necessário ordená-los de forma descendente.
 		for(int j=1; j<numClientes; j++)
-			while(arrayT[j]>arrayT[j-1])
+			while(numContactos[j]>numContactos[j-1])
 			{
-			int tempInt=arrayT[j-1];
-			Cliente tempC=t[j-1];
-			arrayT[j-1]=arrayT[j];
-			arrayT[j]=tempInt;
-			t[j-1]=t[j];
-			t[j]=tempC;
+			int tempInt=numContactos[j-1];
+			Cliente tempC=nomeClientes[j-1];
+			numContactos[j-1]=numContactos[j];
+			numContactos[j]=tempInt;
+			nomeClientes[j-1]=nomeClientes[j];
+			nomeClientes[j]=tempC;
 			if(j>1)
 			j--;
 			}
 		
-		return t;
+		return nomeClientes;
 	}
 	
 	
@@ -92,15 +92,51 @@ public class DBContacto {
 			return tmp.toString();}
 
 	
-	public String listRudeContact(String cont){ //Listar clientes mal-educados.
+	public String listRudeContact(String nomeCliente){ //Listar clientes mal-educados.
 		
 		ArrayList<Contacto> temp = new ArrayList<Contacto>();
 		for(int i = 0;i<db.size();i++){
-			if(db.get(i).nomeClienteToCompare.equals(cont)==true){
+			if(db.get(i).nomeClienteToCompare.equals(nomeCliente)==true){
 				temp.add(db.get(i));
 			}
 		}
 		return temp.toString();
 	}
-	
+	public Cliente[] listNeverContact(Database x){
+		
+		ArrayList<Contacto> temp;
+		//número de clientes existentes na empresa
+		int numClientes=x.data.size();
+		//Array de inteiros que indica o número de contactos dos clientes. há uma correspondência
+		//directa entre numContactos e nomeClientes; numa posição em que correspondam (i=0, por exemplo), indica que
+		//o cliente cujo nome é t[0] tem x contactos efectuados (corresponde a arrayT[0]).
+		int[] numContactos=new int[numClientes];
+		
+		Cliente[] nomeClientes=new Cliente[numClientes];
+		Cliente[] toReturn=new Cliente[numClientes];
+		//nomeClientes tem os nomes de todos os clientes da empresa
+		for(int i=0; i<numClientes; i++)
+			nomeClientes[i]=x.getCliente(i);
+		for(int i=0; i<numClientes; i++)
+			{
+			temp=new ArrayList<Contacto>();
+			//nomeClientes já tem valores. Vamos popular numContactos.
+			for(int j=0; j<this.db.size(); j++)
+				if(db.get(j).nomeClienteToCompare.equals(nomeClientes[i].getNome()))
+					temp.add(db.get(j));
+			numContactos[i]=temp.size();
+			}
+		//Neste ponto, temos os nomes dos clientes e o número de contactos, em nomeClientes e numContactos.
+		//Será necessário ordená-los de forma descendente.
+		
+		int k=0;
+		for(int j=0; j<numClientes; j++)
+			{int tempInt=numContactos[j];
+				if(tempInt==0)
+					{toReturn[k]=nomeClientes[j];
+					 k++;}
+			}
+		
+		return toReturn;
+	}
 }
